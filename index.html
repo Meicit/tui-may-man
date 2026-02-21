@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mở Bao Lì Xì May Mắn</title>
+    <title>Lì Xì Chúc Mừng Năm Mới</title>
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #fdf2f2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff5f5;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -18,32 +18,34 @@
 
         h1 {
             color: #d63031;
-            text-shadow: 1px 1px 2px #fab1a0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
         }
 
-        /* Grid 2 hàng ngang (5 cột) */
         .container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 25px;
+            gap: 20px;
             max-width: 900px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
 
-        /* Thiết kế bao lì xì bằng CSS */
+        /* Thiết kế bao lì xì */
         .lixi-box {
             width: 130px;
-            height: 180px;
+            height: 190px;
             background: #d63031;
-            border-radius: 8px;
+            border-radius: 10px;
             position: relative;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            border: 1px solid #b71c1c;
         }
 
         /* Nắp bao lì xì */
@@ -52,117 +54,120 @@
             position: absolute;
             top: 0;
             width: 100%;
-            height: 40px;
+            height: 45px;
             background: #b71c1c;
             border-radius: 0 0 50% 50%;
             z-index: 2;
             transition: transform 0.4s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* Chữ trên bao lì xì */
-        .lixi-box .symbol {
+        /* Chữ Chúc Mừng Năm Mới xếp dọc */
+        .lixi-box .text-gold {
             color: #f1c40f;
-            font-size: 40px;
+            font-size: 16px;
             font-weight: bold;
             z-index: 1;
+            text-align: center;
+            line-height: 1.4;
             text-shadow: 1px 1px 0px #947a0a;
+            padding: 0 10px;
+            margin-top: 20px;
         }
 
         .lixi-box:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(214, 48, 49, 0.4);
         }
 
-        /* Khi đã mở */
+        /* Trạng thái mở */
         .lixi-box.opened {
             background: #fff;
-            border: 2px solid #d63031;
-            cursor: default;
-            transform: rotateY(360deg);
+            border: 3px solid #f1c40f;
+            transform: scale(1.05);
         }
 
         .lixi-box.opened::before {
-            transform: translateY(-40px); /* Mở nắp */
+            transform: translateY(-50px);
         }
 
         .lixi-box.opened .reward {
             display: block;
-            color: #2d3436;
-            font-size: 28px;
-            font-weight: bold;
-            animation: fadeIn 0.5s;
+            color: #d63031;
+            font-size: 32px;
+            font-weight: 800;
+            animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 3;
         }
 
-        .lixi-box.opened .symbol {
+        .lixi-box.opened .text-gold {
             display: none;
         }
 
         .reward { display: none; }
 
         #status {
-            margin-top: 30px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #d63031;
-            height: 40px;
-        }
-
-        button {
             margin-top: 20px;
-            padding: 12px 30px;
-            font-size: 1rem;
-            background: #d63031;
-            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #b71c1c;
+            height: 30px;
+        }
+
+        .btn-reset {
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: #f1c40f;
+            color: #b71c1c;
             border: none;
-            border-radius: 25px;
+            border-radius: 50px;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 0 #947a0a;
         }
 
-        button:hover { background: #ff7675; }
+        .btn-reset:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
 
-        /* Mobile: Chuyển thành 2 cột để dễ nhìn */
+        @keyframes popUp {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
         @media (max-width: 700px) {
-            .container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
+            .container { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
-    <h1>🧧 LÌ XÌ MAY MẮN 🧧</h1>
-    <div id="status">Chọn một bao lì xì để xem điều bất ngờ!</div>
+    <h1>🧧 KHAI XUÂN NHẬN LỘC 🧧</h1>
+    <div id="status">Hãy chọn một bao lì xì may mắn!</div>
 
-    <div class="container" id="lixiContainer">
-        </div>
+    <div class="container" id="lixiContainer"></div>
 
-    <button onclick="location.reload()">Làm mới lượt chơi</button>
+    <button class="btn-reset" onclick="location.reload()">LÀM MỚI LƯỢT CHƠI</button>
 
     <script>
-        // Danh sách giải thưởng
         const rewards = ['10k', '20k', '50k', '10k', '20k', '10k', '50k', '20k', '10k', '10k'];
-        
-        // Trộn ngẫu nhiên
         const shuffledRewards = rewards.sort(() => Math.random() - 0.5);
-        
         const container = document.getElementById('lixiContainer');
         const statusText = document.getElementById('status');
 
-        // Tạo 10 bao lì xì
         for (let i = 0; i < 10; i++) {
             const box = document.createElement('div');
             box.className = 'lixi-box';
-            box.innerHTML = `<div class="symbol">福</div><div class="reward">${shuffledRewards[i]}</div>`;
+            // Chèn chữ Chúc Mừng Năm Mới xuống dòng để đẹp hơn
+            box.innerHTML = `
+                <div class="text-gold">CHÚC<br>MỪNG<br>NĂM<br>MỚI</div>
+                <div class="reward">${shuffledRewards[i]}</div>
+            `;
             box.onclick = () => {
                 if (!box.classList.contains('opened')) {
                     box.classList.add('opened');
-                    statusText.innerText = `Chúc mừng bạn nhận được ${shuffledRewards[i]}!`;
+                    statusText.innerText = `🧧 Chúc mừng! Bạn nhận được ${shuffledRewards[i]}`;
                 }
             };
             container.appendChild(box);
