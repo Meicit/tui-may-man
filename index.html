@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mở Túi Mù May Mắn</title>
+    <style>
+        :root {
+            --primary-color: #ff4757;
+            --box-color: #ffa502;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f1f2f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 { color: var(--primary-color); text-transform: uppercase; }
+
+        /* Grid xếp 2 hàng ngang (5 túi mỗi hàng) */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin-top: 30px;
+        }
+
+        .blind-box {
+            width: 120px;
+            height: 150px;
+            background: var(--box-color);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 10px 0 #e67e22;
+            transition: transform 0.2s, background 0.3s;
+            font-weight: bold;
+            font-size: 24px;
+            color: white;
+            perspective: 1000px;
+        }
+
+        .blind-box:hover {
+            transform: translateY(-5px);
+            background: #ff7f50;
+        }
+
+        .blind-box.opened {
+            background: #ffffff;
+            color: #2f3542;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: default;
+            transform: rotateY(180px);
+            border: 2px solid var(--primary-color);
+        }
+
+        .blind-box.opened span {
+            transform: rotateY(-180px);
+            display: inline-block;
+            color: #27ae60;
+        }
+
+        .reward-text { font-size: 1.2rem; margin-top: 20px; font-weight: bold; }
+
+        @media (max-width: 600px) {
+            .container { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎁 Blind Box Lucky Draw 🎁</h1>
+    <p>Chọn một túi để nhận phần thưởng ngẫu nhiên!</p>
+
+    <div class="container" id="boxContainer">
+        </div>
+
+    <div class="reward-text" id="status">Hãy chọn túi của bạn!</div>
+    <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; cursor: pointer; background: #2f3542; color: white; border: none; border-radius: 5px;">Chơi lại</button>
+
+    <script>
+        const rewards = ['10k', '20k', '50k', '10k', '20k', '10k', '50k', '20k', '10k', '10k'];
+        
+        // Trộn ngẫu nhiên phần thưởng
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        const shuffledRewards = shuffle([...rewards]);
+        const container = document.getElementById('boxContainer');
+        const statusText = document.getElementById('status');
+
+        // Tạo 10 túi mù
+        for (let i = 0; i < 10; i++) {
+            const box = document.createElement('div');
+            box.className = 'blind-box';
+            box.innerHTML = '<span>?</span>';
+            box.onclick = () => openBox(box, i);
+            container.appendChild(box);
+        }
+
+        function openBox(element, index) {
+            if (element.classList.contains('opened')) return;
+
+            const reward = shuffledRewards[index];
+            element.classList.add('opened');
+            element.innerHTML = `<span>${reward}</span>`;
+            
+            statusText.innerText = `Chúc mừng! Bạn đã nhận được ${reward}!`;
+            statusText.style.color = "#e67e22";
+        }
+    </script>
+</body>
+</html>
