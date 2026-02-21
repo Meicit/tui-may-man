@@ -3,149 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lì Xì Tết May Mắn 2026</title>
+    <title>Lì Xì Tết 2026 - Master Edition</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background: radial-gradient(circle, #d63031 0%, #b71c1c 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            overflow-x: hidden;
-            color: #fff;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; margin: 0; padding: 20px; color: #fff; overflow: hidden;
         }
 
-        body::before, body::after {
-            content: "🧧";
-            position: absolute;
-            top: 10px;
-            font-size: 50px;
-            animation: swing 3s infinite ease-in-out;
-        }
-        body::before { left: 5%; }
-        body::after { right: 5%; }
-
-        @keyframes swing {
-            0%, 100% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
-        }
-
-        h1 {
-            color: #f1c40f;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .subtitle { color: #ffead0; margin-bottom: 20px; font-style: italic; }
+        h1 { color: #f1c40f; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-size: 2rem; margin-bottom: 5px; }
+        .subtitle { color: #ffead0; margin-bottom: 25px; font-style: italic; opacity: 0.9; }
 
         .container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            max-width: 900px;
-            z-index: 10;
+            display: grid; grid-template-columns: repeat(5, 1fr);
+            gap: 20px; max-width: 900px;
         }
 
         .lixi-box {
-            width: 130px;
-            height: 190px;
-            background: #e63946;
-            border-radius: 10px;
-            position: relative;
-            cursor: pointer;
+            width: 130px; height: 185px; background: #e63946;
+            border-radius: 10px; position: relative; cursor: pointer;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
             border: 2px solid #f1c40f;
         }
 
         .lixi-box::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 50px;
-            background: #b71c1c;
-            border-radius: 0 0 50% 50%;
-            z-index: 2;
-            transition: transform 0.4s;
-            border-bottom: 1px solid #f1c40f;
+            content: ""; position: absolute; top: 0; width: 100%; height: 50px;
+            background: #b71c1c; border-radius: 0 0 50% 50%; z-index: 2;
+            transition: transform 0.4s; border-bottom: 1px solid #f1c40f;
         }
 
         .text-gold {
-            color: #f1c40f;
-            font-size: 15px;
-            font-weight: bold;
-            z-index: 1;
-            text-align: center;
-            line-height: 1.4;
-            text-shadow: 1px 1px 0px #000;
+            color: #f1c40f; font-size: 14px; font-weight: bold; z-index: 1;
+            text-align: center; line-height: 1.4; text-shadow: 1px 1px 0px #000;
         }
 
-        .lixi-box:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 20px 30px rgba(241, 196, 15, 0.3);
-        }
-
-        .lixi-box.opened { background: #fff; transform: rotateY(10deg); cursor: default; }
-        .lixi-box.opened::before { transform: translateY(-55px); }
+        .lixi-box.opened { background: #fff; cursor: default; transform: scale(1.05); }
+        .lixi-box.opened::before { transform: translateY(-60px); }
 
         .reward {
-            display: none;
-            color: #d63031;
-            font-size: 35px;
-            font-weight: 900;
-            z-index: 3;
+            display: none; color: #d63031; font-size: 35px;
+            font-weight: 900; z-index: 3;
         }
 
         .lixi-box.opened .reward { display: block; animation: pop 0.5s ease; }
         .lixi-box.opened .text-gold { display: none; }
 
-        @keyframes pop {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
-        }
-
-        #status {
-            margin-top: 20px;
-            font-size: 1.4rem;
-            color: #f1c40f;
-            font-weight: bold;
-            height: 35px;
-            text-shadow: 1px 1px 2px #000;
-        }
+        #status { margin-top: 25px; font-size: 1.4rem; color: #f1c40f; font-weight: bold; height: 40px; text-shadow: 1px 1px 2px #000; }
 
         .btn-reset {
-            margin-top: 30px;
-            padding: 15px 40px;
-            background: #f1c40f;
-            color: #b71c1c;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
+            margin-top: 30px; padding: 12px 40px; background: #f1c40f;
+            color: #b71c1c; border: none; border-radius: 50px;
+            font-weight: bold; font-size: 1rem; cursor: pointer;
             box-shadow: 0 5px 0 #947a0a;
-            z-index: 10;
         }
 
-        .btn-reset:active { transform: translateY(5px); box-shadow: none; }
-
         .petal {
-            position: absolute;
-            background-color: #ffb7c5;
-            border-radius: 150% 0 150% 0;
-            opacity: 0.8;
-            pointer-events: none;
-            animation: fall linear infinite;
+            position: absolute; background-color: #ffb7c5;
+            border-radius: 150% 0 150% 0; opacity: 0.8;
+            pointer-events: none; animation: fall linear infinite;
         }
 
         @keyframes fall {
@@ -153,48 +71,63 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        @media (max-width: 700px) {
-            .container { grid-template-columns: repeat(2, 1fr); }
-            h1 { font-size: 1.5rem; }
-        }
+        @keyframes pop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        @media (max-width: 700px) { .container { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
 
     <h1>🧧 KHAI XUÂN NHẬN LỘC 🧧</h1>
     <div class="subtitle">Chúc mừng năm mới 2026 - Vạn sự như ý</div>
-    <div id="status">Hãy chọn bao lì xì của bạn!</div>
+    <div id="status">Chọn một bao lì xì may mắn!</div>
 
     <div class="container" id="lixiContainer"></div>
 
     <button class="btn-reset" onclick="location.reload()">CHƠI LẠI LƯỢT MỚI</button>
 
     <script>
-        // --- LOGIC RANDOM THEO YÊU CẦU ---
+        let cheatActive = false;
+        let hasOpenedAny = false;
+
         function generateRewards() {
             let pool = [];
-            
-            // 1. Random 0-1 kết quả 50k
-            const count50k = Math.floor(Math.random() * 2); // Trả về 0 hoặc 1
-            for(let i=0; i < count50k; i++) pool.push('50k');
-
-            // 2. Random 1-2 kết quả 20k
-            const count20k = Math.floor(Math.random() * 2) + 1; // Trả về 1 hoặc 2
+            if(Math.random() < 0.33) pool.push('50k');
+            const count20k = Math.floor(Math.random() * 2) + 1;
             for(let i=0; i < count20k; i++) pool.push('20k');
-
-            // 3. Còn lại là 10k cho đủ 10 túi
-            const remaining = 10 - pool.length;
-            for(let i=0; i < remaining; i++) pool.push('10k');
-
-            // Trộn ngẫu nhiên vị trí các giải đã chọn
+            while(pool.length < 10) pool.push('10k');
             return pool.sort(() => Math.random() - 0.5);
         }
 
         const shuffledRewards = generateRewards();
         const container = document.getElementById('lixiContainer');
-        const statusText = document.getElementById('status');
 
-        // Tạo cánh hoa đào rơi
+        for (let i = 0; i < 10; i++) {
+            const box = document.createElement('div');
+            box.className = 'lixi-box';
+            box.innerHTML = `<div class="text-gold">CHÚC MỪNG<br>NĂM MỚI<br>2026</div><div class="reward" id="val-${i}">${shuffledRewards[i]}</div>`;
+            
+            box.onclick = () => {
+                if (box.classList.contains('opened')) return;
+                const valDisplay = document.getElementById(`val-${i}`);
+
+                if (cheatActive && !hasOpenedAny) {
+                    valDisplay.innerText = '50k';
+                }
+
+                box.classList.add('opened');
+                hasOpenedAny = true;
+                document.getElementById('status').innerText = `🧧 Chúc mừng! Bạn nhận được ${valDisplay.innerText}`;
+            };
+            container.appendChild(box);
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'AltRight' || e.key === 'AltGraph') {
+                cheatActive = true;
+            }
+        });
+
         function createPetal() {
             const petal = document.createElement('div');
             petal.className = 'petal';
@@ -205,24 +138,7 @@
             document.body.appendChild(petal);
             setTimeout(() => petal.remove(), 5000);
         }
-        setInterval(createPetal, 300);
-
-        // Tạo 10 bao lì xì
-        for (let i = 0; i < 10; i++) {
-            const box = document.createElement('div');
-            box.className = 'lixi-box';
-            box.innerHTML = `
-                <div class="text-gold">CHÚC MỪNG<br>NĂM MỚI<br>2026</div>
-                <div class="reward">${shuffledRewards[i]}</div>
-            `;
-            box.onclick = () => {
-                if (!box.classList.contains('opened')) {
-                    box.classList.add('opened');
-                    statusText.innerText = `🧧 Tuyệt vời! Bạn nhận được ${shuffledRewards[i]}`;
-                }
-            };
-            container.appendChild(box);
-        }
+        setInterval(createPetal, 400);
     </script>
 </body>
 </html>
