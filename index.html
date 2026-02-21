@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lì Xì Tết May Mắn</title>
+    <title>Lì Xì Tết May Mắn 2026</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Nền màu đỏ Tết kết hợp hoa văn nhẹ */
             background: radial-gradient(circle, #d63031 0%, #b71c1c 100%);
             display: flex;
             flex-direction: column;
@@ -19,7 +18,6 @@
             color: #fff;
         }
 
-        /* Hiệu ứng đèn lồng treo 2 bên (CSS vẽ) */
         body::before, body::after {
             content: "🧧";
             position: absolute;
@@ -43,11 +41,7 @@
             margin-bottom: 5px;
         }
 
-        .subtitle {
-            color: #ffead0;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
+        .subtitle { color: #ffead0; margin-bottom: 20px; font-style: italic; }
 
         .container {
             display: grid;
@@ -57,7 +51,6 @@
             z-index: 10;
         }
 
-        /* Bao lì xì */
         .lixi-box {
             width: 130px;
             height: 190px;
@@ -102,11 +95,7 @@
             box-shadow: 0 20px 30px rgba(241, 196, 15, 0.3);
         }
 
-        .lixi-box.opened {
-            background: #fff;
-            transform: rotateY(10deg);
-        }
-
+        .lixi-box.opened { background: #fff; transform: rotateY(10deg); cursor: default; }
         .lixi-box.opened::before { transform: translateY(-55px); }
 
         .reward {
@@ -131,6 +120,7 @@
             color: #f1c40f;
             font-weight: bold;
             height: 35px;
+            text-shadow: 1px 1px 2px #000;
         }
 
         .btn-reset {
@@ -149,10 +139,9 @@
 
         .btn-reset:active { transform: translateY(5px); box-shadow: none; }
 
-        /* Hiệu ứng hoa rơi (vẽ bằng CSS) */
         .petal {
             position: absolute;
-            background-color: #ffb7c5; /* Màu hoa đào */
+            background-color: #ffb7c5;
             border-radius: 150% 0 150% 0;
             opacity: 0.8;
             pointer-events: none;
@@ -173,20 +162,39 @@
 <body>
 
     <h1>🧧 KHAI XUÂN NHẬN LỘC 🧧</h1>
-    <div class="subtitle">Tết 2026 - Vui xuân sang, nhận quà vàng</div>
+    <div class="subtitle">Chúc mừng năm mới 2026 - Vạn sự như ý</div>
     <div id="status">Hãy chọn bao lì xì của bạn!</div>
 
     <div class="container" id="lixiContainer"></div>
 
-    <button class="btn-reset" onclick="location.reload()">CHƠI LẠI TỪ ĐẦU</button>
+    <button class="btn-reset" onclick="location.reload()">CHƠI LẠI LƯỢT MỚI</button>
 
     <script>
-        const rewards = ['10k', '20k', '50k', '10k', '20k', '10k', '50k', '20k', '10k', '10k'];
-        const shuffledRewards = rewards.sort(() => Math.random() - 0.5);
+        // --- LOGIC RANDOM THEO YÊU CẦU ---
+        function generateRewards() {
+            let pool = [];
+            
+            // 1. Random 0-1 kết quả 50k
+            const count50k = Math.floor(Math.random() * 2); // Trả về 0 hoặc 1
+            for(let i=0; i < count50k; i++) pool.push('50k');
+
+            // 2. Random 1-2 kết quả 20k
+            const count20k = Math.floor(Math.random() * 2) + 1; // Trả về 1 hoặc 2
+            for(let i=0; i < count20k; i++) pool.push('20k');
+
+            // 3. Còn lại là 10k cho đủ 10 túi
+            const remaining = 10 - pool.length;
+            for(let i=0; i < remaining; i++) pool.push('10k');
+
+            // Trộn ngẫu nhiên vị trí các giải đã chọn
+            return pool.sort(() => Math.random() - 0.5);
+        }
+
+        const shuffledRewards = generateRewards();
         const container = document.getElementById('lixiContainer');
         const statusText = document.getElementById('status');
 
-        // Tạo cánh hoa rơi
+        // Tạo cánh hoa đào rơi
         function createPetal() {
             const petal = document.createElement('div');
             petal.className = 'petal';
@@ -210,8 +218,7 @@
             box.onclick = () => {
                 if (!box.classList.contains('opened')) {
                     box.classList.add('opened');
-                    statusText.innerText = `Chúc mừng! Bạn vừa nhận ${shuffledRewards[i]} 🧧`;
-                    statusText.style.animation = "pop 0.3s ease";
+                    statusText.innerText = `🧧 Tuyệt vời! Bạn nhận được ${shuffledRewards[i]}`;
                 }
             };
             container.appendChild(box);
