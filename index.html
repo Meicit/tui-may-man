@@ -3,16 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mở Túi Mù May Mắn</title>
+    <title>Mở Bao Lì Xì May Mắn</title>
     <style>
-        :root {
-            --primary-color: #ff4757;
-            --box-color: #ffa502;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f1f2f6;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #fdf2f2;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -21,103 +16,156 @@
             padding: 20px;
         }
 
-        h1 { color: var(--primary-color); text-transform: uppercase; }
+        h1 {
+            color: #d63031;
+            text-shadow: 1px 1px 2px #fab1a0;
+        }
 
-        /* Grid xếp 2 hàng ngang (5 túi mỗi hàng) */
+        /* Grid 2 hàng ngang (5 cột) */
         .container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            max-width: 800px;
-            margin-top: 30px;
+            gap: 25px;
+            max-width: 900px;
+            margin-top: 40px;
         }
 
-        .blind-box {
-            width: 120px;
-            height: 150px;
-            background: var(--box-color);
-            border-radius: 10px;
+        /* Thiết kế bao lì xì bằng CSS */
+        .lixi-box {
+            width: 130px;
+            height: 180px;
+            background: #d63031;
+            border-radius: 8px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            position: relative;
-            box-shadow: 0 10px 0 #e67e22;
-            transition: transform 0.2s, background 0.3s;
+            overflow: hidden;
+        }
+
+        /* Nắp bao lì xì */
+        .lixi-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 40px;
+            background: #b71c1c;
+            border-radius: 0 0 50% 50%;
+            z-index: 2;
+            transition: transform 0.4s;
+        }
+
+        /* Chữ trên bao lì xì */
+        .lixi-box .symbol {
+            color: #f1c40f;
+            font-size: 40px;
             font-weight: bold;
-            font-size: 24px;
-            color: white;
-            perspective: 1000px;
+            z-index: 1;
+            text-shadow: 1px 1px 0px #947a0a;
         }
 
-        .blind-box:hover {
-            transform: translateY(-5px);
-            background: #ff7f50;
+        .lixi-box:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
-        .blind-box.opened {
-            background: #ffffff;
-            color: #2f3542;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        /* Khi đã mở */
+        .lixi-box.opened {
+            background: #fff;
+            border: 2px solid #d63031;
             cursor: default;
-            transform: rotateY(180px);
-            border: 2px solid var(--primary-color);
+            transform: rotateY(360deg);
         }
 
-        .blind-box.opened span {
-            transform: rotateY(-180px);
-            display: inline-block;
-            color: #27ae60;
+        .lixi-box.opened::before {
+            transform: translateY(-40px); /* Mở nắp */
         }
 
-        .reward-text { font-size: 1.2rem; margin-top: 20px; font-weight: bold; }
+        .lixi-box.opened .reward {
+            display: block;
+            color: #2d3436;
+            font-size: 28px;
+            font-weight: bold;
+            animation: fadeIn 0.5s;
+        }
 
-        @media (max-width: 600px) {
-            .container { grid-template-columns: repeat(2, 1fr); }
+        .lixi-box.opened .symbol {
+            display: none;
+        }
+
+        .reward { display: none; }
+
+        #status {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d63031;
+            height: 40px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            background: #d63031;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        button:hover { background: #ff7675; }
+
+        /* Mobile: Chuyển thành 2 cột để dễ nhìn */
+        @media (max-width: 700px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <h1>🎁 Blind Box Lucky Draw 🎁</h1>
-    <p>Chọn một túi để nhận phần thưởng ngẫu nhiên!</p>
+    <h1>🧧 LÌ XÌ MAY MẮN 🧧</h1>
+    <div id="status">Chọn một bao lì xì để xem điều bất ngờ!</div>
 
-    <div class="container" id="boxContainer">
+    <div class="container" id="lixiContainer">
         </div>
 
-    <div class="reward-text" id="status">Hãy chọn túi của bạn!</div>
-    <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; cursor: pointer; background: #2f3542; color: white; border: none; border-radius: 5px;">Chơi lại</button>
+    <button onclick="location.reload()">Làm mới lượt chơi</button>
 
     <script>
+        // Danh sách giải thưởng
         const rewards = ['10k', '20k', '50k', '10k', '20k', '10k', '50k', '20k', '10k', '10k'];
         
-        // Trộn ngẫu nhiên phần thưởng
-        function shuffle(array) {
-            return array.sort(() => Math.random() - 0.5);
-        }
-
-        const shuffledRewards = shuffle([...rewards]);
-        const container = document.getElementById('boxContainer');
+        // Trộn ngẫu nhiên
+        const shuffledRewards = rewards.sort(() => Math.random() - 0.5);
+        
+        const container = document.getElementById('lixiContainer');
         const statusText = document.getElementById('status');
 
-        // Tạo 10 túi mù
+        // Tạo 10 bao lì xì
         for (let i = 0; i < 10; i++) {
             const box = document.createElement('div');
-            box.className = 'blind-box';
-            box.innerHTML = '<span>?</span>';
-            box.onclick = () => openBox(box, i);
+            box.className = 'lixi-box';
+            box.innerHTML = `<div class="symbol">福</div><div class="reward">${shuffledRewards[i]}</div>`;
+            box.onclick = () => {
+                if (!box.classList.contains('opened')) {
+                    box.classList.add('opened');
+                    statusText.innerText = `Chúc mừng bạn nhận được ${shuffledRewards[i]}!`;
+                }
+            };
             container.appendChild(box);
-        }
-
-        function openBox(element, index) {
-            if (element.classList.contains('opened')) return;
-
-            const reward = shuffledRewards[index];
-            element.classList.add('opened');
-            element.innerHTML = `<span>${reward}</span>`;
-            
-            statusText.innerText = `Chúc mừng! Bạn đã nhận được ${reward}!`;
-            statusText.style.color = "#e67e22";
         }
     </script>
 </body>
